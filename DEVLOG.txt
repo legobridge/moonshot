@@ -1,0 +1,26 @@
+2023-11-08 23:03:38
+
+I've decided to call this new game "Moonshot". Why? I'll figure it out, but I'm guessing it will have moon(s) and shooting in it.
+
+
+Aesthetic Goals:
+
+1. The player should have limited attempts to achieve the goal(s) of the game, and should feel the pressure to get it right in as few attempts as possible.
+   This goal will require the game to balance the difficulty of each attempt so that it's possible to fail but not impossible to win.
+   If the player is winning more often than losing, it is a good sign.
+   If the player is losing at least 50% of the time, or winning 100% of the time, it is a bad sign.
+
+2. There should be a sense of pride and accomplishment in the player once they eventually succeed (they should feel cool for having won).
+   If the game takes some time to figure out, but the solution appears clever once it's figured out, this goal is successful.
+   If the solution is too obvious and the game is too easy to win, this goal has failed.
+
+
+Core Loop:
+
+The player controls a bunch of scientists on Earth trying to successfully land a rocket on any one of Jupiter's moons. 
+Our own moon, Mars, the asteroid belt, and Jupiter are the major obstacles in our way.
+The scientists know their aim sucks, so they built three rockets. 
+The game loop is to move the Earth to the ideal point in its orbit, then aim and fire a rocket until the player succeeds or runs out of rockets.
+The limit of 3 rockets serves the first aesthetic goal. 
+The ideal position of Earth relative to the other heavenly bodies is not obvious, and neither is the aiming of the rocket. This serves the second goal.
+

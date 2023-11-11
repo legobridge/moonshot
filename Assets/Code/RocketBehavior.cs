@@ -8,8 +8,6 @@ public class RocketBehavior : MonoBehaviour
 
     private float _distanceFromEarthCenter;
     private float _angle;
-    private float _xBoost = 0f;
-    private float _yBoost = 0f;
     private Vector3 _velocityVector = new Vector3(0, 0, 0);
 
     void Start()
@@ -20,10 +18,16 @@ public class RocketBehavior : MonoBehaviour
 
     void Update()
     {
-        if (Code.UI.IsRocketFired())
+    }
+
+    private void FixedUpdate()
+    {
+        if (Code.GameState.IsRocketFired())
         {
-            _xBoost = -Input.GetAxis("Horizontal");
-            _yBoost = -Input.GetAxis("Vertical");
+            float xBoost = -Input.GetAxis("Horizontal");
+            float yBoost = -Input.GetAxis("Vertical");
+            _velocityVector += BoosterVelocity * (transform.right * xBoost + transform.up * yBoost);
+            transform.localPosition += _velocityVector;
         }
         else
         {
@@ -33,20 +37,11 @@ public class RocketBehavior : MonoBehaviour
             transform.localEulerAngles = new Vector3(0, 0, Mathf.Rad2Deg * _angle + 90);
             transform.localPosition = _distanceFromEarthCenter * new Vector2(Mathf.Cos(_angle), Mathf.Sin(_angle));
 
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButton("Jump"))
             {
                 _velocityVector = LaunchVelocity * transform.localPosition;
-                Code.UI.FireRocket();
+                Code.GameState.FireRocket();
             }
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        if (Code.UI.IsRocketFired())
-        {
-            _velocityVector += BoosterVelocity * (transform.right * _xBoost + transform.up * _yBoost);
-            transform.localPosition += _velocityVector;
         }
     }
 }

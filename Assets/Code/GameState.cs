@@ -4,13 +4,14 @@ using UnityEngine.SceneManagement;
 
 namespace Code
 {
-    public class UI : MonoBehaviour
+    public class GameState : MonoBehaviour
     {
-        public static UI Singleton;
+        public static GameState Singleton;
 
         public TextMeshProUGUI PetsReceivedText;
         public TextMeshProUGUI TimeLeftText;
         public TextMeshProUGUI gameOverText;
+        public static float GravitationalConstant = 6.6743e-11f;
         public int RocketLimit = 3;
 
         private int _rocketsLeft;
@@ -38,6 +39,18 @@ namespace Code
 
         private void Update()
         {
+            if (_isGameOver)
+            {
+                if (Input.GetButtonDown("Cancel"))
+                {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    ResetStatus();
+                }
+            }
+        }
+
+        private void FixedUpdate()
+        {
             if (_isRocketFired)
             {
 
@@ -46,14 +59,6 @@ namespace Code
             {
                 float y = Input.GetAxis("Vertical");
                 _timeState += y;
-            }
-            if (_isGameOver)
-            {
-                if (Input.GetButtonDown("Cancel"))
-                {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-                    ResetStatus();
-                }
             }
         }
 

@@ -11,7 +11,7 @@ namespace Code
         public TextMeshProUGUI PetsReceivedText;
         public TextMeshProUGUI TimeLeftText;
         public TextMeshProUGUI gameOverText;
-        public static float GravitationalConstant = 6.6743e-11f;
+        public static float GravitationalConstant = 6.6743e-6f;
         public int RocketLimit = 3;
 
         private int _rocketsLeft;
@@ -93,7 +93,16 @@ namespace Code
             _isRocketFired = true;
 
             //PetsReceivedText.text = $"Pets Received: {_petsReceived}/{_numHumans}";
+        }
 
+        public static void ResetRocket()
+        {
+            Singleton.ResetRocketInternal();
+        }
+
+        private void ResetRocketInternal()
+        {
+            _isRocketFired = false;
             if (_rocketsLeft == 0) // Todo: do this only when final rocket crashes
             {
                 GameOver(false);

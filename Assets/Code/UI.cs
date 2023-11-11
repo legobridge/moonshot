@@ -15,6 +15,7 @@ namespace Code
 
         private int _rocketsLeft;
         private float _timeState = 0f;
+        private bool _isRocketFired;
         private bool _isGameOver;
 
 
@@ -28,6 +29,7 @@ namespace Code
         {
             _rocketsLeft = RocketLimit;
             _timeState = 0f;
+            _isRocketFired = false;
             _isGameOver = false;
             //PetsReceivedText.text = $"Pets Received: {_petsReceived}/{_numHumans}";
             //TimeLeftText.text = $"Time Left: {_timeLeft}";
@@ -36,8 +38,15 @@ namespace Code
 
         private void Update()
         {
-            float y = Input.GetAxis("Vertical");
-            _timeState += y;
+            if (_isRocketFired)
+            {
+
+            }
+            else
+            {
+                float y = Input.GetAxis("Vertical");
+                _timeState += y;
+            }
             if (_isGameOver)
             {
                 if (Input.GetButtonDown("Cancel"))
@@ -58,17 +67,29 @@ namespace Code
             return _timeState;
         }
 
-        public static void DecrementRockets()
+        public static bool IsRocketFired()
         {
-            Singleton.DecrementRocketsInternal();
+            return Singleton.IsRocketFiredInternal();
         }
 
-        private void DecrementRocketsInternal()
+        private bool IsRocketFiredInternal()
+        {
+            return _isRocketFired;
+        }
+
+        public static void FireRocket()
+        {
+            Singleton.FireRocketInternal();
+        }
+
+        private void FireRocketInternal()
         {
             _rocketsLeft--;
+            _isRocketFired = true;
+
             //PetsReceivedText.text = $"Pets Received: {_petsReceived}/{_numHumans}";
 
-            if (_rocketsLeft == 0)
+            if (_rocketsLeft == 0) // Todo: do this only when final rocket crashes
             {
                 GameOver(false);
             }

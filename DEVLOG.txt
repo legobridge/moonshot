@@ -1,4 +1,4 @@
-2023-11-08 23:03:38
+2023-11-08 23:03
 
 I've decided to call this new game "Moonshot". Why? I'll figure it out, but I'm guessing it will have moon(s) and shooting in it.
 
@@ -25,7 +25,7 @@ The limit of 3 rockets serves the first aesthetic goal.
 The ideal position of Earth relative to the other heavenly bodies is not obvious, and neither is the aiming of the rocket. This serves the second goal.
 
 
-2023-11-09 22:57:37
+2023-11-09 22:57
 
 Started work on laying out the planets in Unity and immediately ran into several questions about scale.
 Trying to use the actual scale of distances would make the game:
@@ -39,3 +39,106 @@ So, I've decided to prioritize the aesthetic goals over realism, and will simply
 P.S. Outer Wilds did something similar, with great success.
 
 
+2023-11-10 19:45
+
+Set up the scene with blank circular sprites and wrote logic that makes planets orbit the sun and the moons orbit the planets. 
+Got stuck on a stupid bug for an embarrassingly long amount of time, and all I had to do was use localPosition instead of position.
+
+
+2023-11-10 21:30
+
+Added a capsule sprite for the rocket and implemented keyboard controls to move it around the Earth.
+It took some time to get the rotation right, using Euler Angles.
+
+
+2023-11-10 22:37
+
+Implemented the rocket launch action and added the ability to use arrow keys to control thrusters for post-launch control of the rocket.
+Not satisfied with the control scheme, since different actions currently share the same keys pre and post launch.
+(Also it's hard to aim)
+
+
+2023-11-11 00:36
+
+The behavior of the planets and rocket was very different based on whether my Macbook was plugged in or on battery. 
+Figured out that this was due to difference in FPS due to power saving settings. 
+Decided to move all physics calculations from Update() to FixedUpdate() (as I should have done from the get-go).
+
+
+2023-11-11 01:42
+
+Finally implemented collision detection (rockets crash into planets now).
+Also finished the game over screen and other UI elements.
+Also added gravitational effects - the game is finally getting interesting. Time to get some sleep.
+
+
+2023-11-13 00:27
+
+Added the game win condition (landed on Jupiter's moons).
+Improved the control scheme - now players use the mouse to aim. 
+This adds reproducability between attempts, so it is easier to learn from your mistakes and do better next time.
+The game feels a bit too easy now though.
+Also fixed a nasty bug that was causing an extra rocket to spawn sometimes.
+
+
+2023-11-13 02:45
+
+Spent over a couple of hours trying to get the sprites and sounds right. Everything looks so good now!
+I'm gonna regret staying up this late though.
+
+
+2023-11-13 12:25
+
+I did regret staying up that late.
+Figured out how to make the game a bit challenging again. 
+I realized that time should pass once the player has launched the rocket. 
+This complicates attempts to make the exact same shot every attempt. 
+I think the game's in a good spot now, and I can start writing the instructions etc.
+
+
+2023-11-13 13:35
+
+It's all done! Gonna write the postmortem and be done with it now.
+
+
+Postmortem:
+
+Original Goals:
+
+I set out to create a puzzle game called "Moonshot". 
+The aesthetic goals were to provide players with limited attempts, 
+creating a sense of pressure and achievement upon success. 
+The core loop involved landing a rocket on one of Jupiter's moons, 
+with challenging mechanics and a clever solution.
+
+End Goals:
+
+The final goals were to balance difficulty, create a sense of accomplishment,
+and maintain a fun and challenging core loop. 
+The game required players to strategically land rockets on Jupiter's moons,
+overcoming obstacles like Earth, Mars, the asteroid belt, and Jupiter itself.
+
+Accomplishments:
+
+Implemented a core loop with orbiting planets and rocket launching mechanics.
+Established limited attempts (3 rockets) to achieve the first aesthetic goal.
+Created a challenging aiming system to fulfill the second aesthetic goal.
+Developed orbital mechanics, gravitational effects, collision detection.
+Enhanced control schemes with keyboard and mouse inputs.
+Polished visuals and fixed bugs for a more enjoyable user experience.
+
+What Went Right:
+
+Mechanics Implementation: Successfully implemented core mechanics like orbital movement, rocket control, and collision detection.
+Aesthetics: Achieved a visually appealing game with sprites, sounds, and improved controls.
+Adaptability: Responded to challenges such as scaling issues and power-saving settings promptly.
+Iterative Design: Continuously refined the game, addressing issues like control schemes and difficulty levels.
+
+What Went Wrong:
+
+Initial Scaling Issues: Faced challenges with selecting a realistic scale, prompting a shift towards prioritizing fun over realism.
+Control Scheme Issues: Encountered dissatisfaction with the initial control scheme, leading to adjustments for better user experience.
+FPS Dependency: Realized the impact of FPS on game behavior, requiring a shift to FixedUpdate() for physics calculations.
+Late-night Decisions: Experienced regret over late-night decisions, leading to additional work for balancing the game's difficulty.
+
+I am VERY satisfied with the end product. It's not much but it's a labor of love.

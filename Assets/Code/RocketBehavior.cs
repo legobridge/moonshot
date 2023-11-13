@@ -22,6 +22,12 @@ public class RocketBehavior : MonoBehaviour
 
     void Update()
     {
+        if (!Code.GameState.IsRocketLaunched() && Input.GetButtonDown("Jump"))
+        {
+            _velocityVector = LaunchVelocity * transform.localPosition;
+            _audioManager.PlayOneShot(LaunchSound);
+            Code.GameState.LaunchRocket();
+        }
     }
 
     private void FixedUpdate()
@@ -61,13 +67,6 @@ public class RocketBehavior : MonoBehaviour
             float zRotation = -Vector2.SignedAngle(directionToMouse, new Vector2(0, 1));
             transform.localEulerAngles = new Vector3(0, 0, zRotation); // todo
             transform.localPosition = _initialDistanceFromEarthCenter * directionToMouse;
-
-            if (Input.GetButton("Jump"))
-            {
-                _velocityVector = LaunchVelocity * transform.localPosition;
-                _audioManager.PlayOneShot(LaunchSound);
-                Code.GameState.LaunchRocket();
-            }
         }
     }
 

@@ -24,9 +24,18 @@ The game loop is to move the Earth to the ideal point in its orbit, then aim and
 The limit of 3 rockets serves the first aesthetic goal. 
 The ideal position of Earth relative to the other heavenly bodies is not obvious, and neither is the aiming of the rocket. This serves the second goal.
 
+
 2023-11-09 22:57:37
 
-Started work on laying out the planets in Unity and immediately ran into several questions about scale. Trying to use the actual scale of distances would make the game (a) look weird, (b) not fit on a single screen (and I don't want to make players scroll), and (c) very hard and not fun at all. The actual scale of sizes of the planets would also cause similar problems. 
+Started work on laying out the planets in Unity and immediately ran into several questions about scale.
+Trying to use the actual scale of distances would make the game:
+   (a) look weird,
+   (b) not fit on a single screen (and I don't want to make players scroll), and 
+   (c) very hard and not fun at all.
 
-So, I've decided to prioritize the aesthetic goals over realism, and will simply pick whatever sizes and distances make the game fun (Outer Wilds did something similar, with great success).
+The actual scale of sizes of the planets would also cause similar problems. 
+
+So, I've decided to prioritize the aesthetic goals over realism, and will simply pick whatever sizes and distances make the game fun.
+P.S. Outer Wilds did something similar, with great success.
+
 

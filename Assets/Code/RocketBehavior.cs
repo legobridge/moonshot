@@ -3,15 +3,21 @@ using UnityEngine;
 public class RocketBehavior : MonoBehaviour
 {
     public float LaunchVelocity = 0.3f;
-    public float ThrusterVelocity = 0.0004f;
+    public float ThrusterVelocity = 0.0005f;
     public GameObject RocketPrefab;
+    public AudioClip LaunchSound;
+    public AudioClip ThrusterSound;
+    public AudioClip CrashSound;
+    public AudioClip WinSound;
 
     private float _initialDistanceFromEarthCenter;
     private Vector3 _velocityVector = new Vector3(0, 0, 0);
+    private AudioManager _audioManager;
 
     void Start()
     {
         _initialDistanceFromEarthCenter = transform.localPosition.magnitude;
+        _audioManager = FindObjectOfType<AudioManager>();
     }
 
     void Update()
@@ -20,11 +26,11 @@ public class RocketBehavior : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Code.GameState.IsRocketFired())
+        if (Code.GameState.IsRocketLaunched())
         {
             // Compute amount of thruster boost
-            float xBoost = -Input.GetAxis("Horizontal");
-            float yBoost = -Input.GetAxis("Vertical");
+            float xBoost = Input.GetAxis("Horizontal");
+            float yBoost = Input.GetAxis("Vertical");
             Vector3 boost = ThrusterVelocity * (transform.right * xBoost + transform.up * yBoost);
 
             // Compute gravitational effects
@@ -35,6 +41,11 @@ public class RocketBehavior : MonoBehaviour
                 Vector3 vectorToMb = mb.transform.position - transform.position;
                 float acc = mb.GetAcceleration(vectorToMb.magnitude);
                 gravitationalAcc += acc * vectorToMb.normalized;
+            }
+
+            if (boost.magnitude > 0.01f)
+            {
+                _audioManager.PlayOneShot(ThrusterSound);
             }
 
             // Change velocity
@@ -54,18 +65,19 @@ public class RocketBehavior : MonoBehaviour
             if (Input.GetButton("Jump"))
             {
                 _velocityVector = LaunchVelocity * transform.localPosition;
-                Code.GameState.FireRocket();
+                _audioManager.PlayOneShot(LaunchSound);
+                Code.GameState.LaunchRocket();
             }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (Code.GameState.IsRocketFired())
+        if (Code.GameState.IsRocketLaunched())
         {
-            string colliderParentName = collision.gameObject.transform.parent.gameObject.name;
-            if (colliderParentName == "Jupiter")
+            if (collision.name != "Sun" && collision.transform.parent.name == "Jupiter")
             {
+                _audioManager.PlayOneShot(WinSound);
                 Code.GameState.GameOver(true);
                 Destroy(gameObject);
             }
@@ -83,8 +95,9 @@ public class RocketBehavior : MonoBehaviour
 
     private void CrashRocket()
     {
-        if (Code.GameState.IsRocketFired())
+        if (Code.GameState.IsRocketLaunched())
         {
+            _audioManager.PlayOneShot(CrashSound);
             Code.GameState.ResetRocket();
             if (!Code.GameState.IsGameOver())
             {

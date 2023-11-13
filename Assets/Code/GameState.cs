@@ -15,7 +15,7 @@ namespace Code
 
         private int _rocketsLeft;
         private float _timeState = 0f;
-        private bool _isRocketFired;
+        private bool _isRocketLaunched;
         private bool _isGameOver;
 
 
@@ -29,7 +29,7 @@ namespace Code
         {
             _rocketsLeft = RocketLimit;
             _timeState = 0f;
-            _isRocketFired = false;
+            _isRocketLaunched = false;
             _isGameOver = false;
             RocketsLeftText.text = $"Rockets Left: {_rocketsLeft}/{RocketLimit}";
             gameOverText.text = "";
@@ -49,7 +49,7 @@ namespace Code
 
         private void FixedUpdate()
         {
-            if (_isRocketFired)
+            if (_isRocketLaunched)
             {
 
             }
@@ -79,25 +79,25 @@ namespace Code
             return _timeState;
         }
 
-        public static bool IsRocketFired()
+        public static bool IsRocketLaunched()
         {
-            return Singleton.IsRocketFiredInternal();
+            return Singleton.IsRocketLaunchedInternal();
         }
 
-        private bool IsRocketFiredInternal()
+        private bool IsRocketLaunchedInternal()
         {
-            return _isRocketFired;
+            return _isRocketLaunched;
         }
 
-        public static void FireRocket()
+        public static void LaunchRocket()
         {
-            Singleton.FireRocketInternal();
+            Singleton.LaunchRocketInternal();
         }
 
-        private void FireRocketInternal()
+        private void LaunchRocketInternal()
         {
             _rocketsLeft--;
-            _isRocketFired = true;
+            _isRocketLaunched = true;
 
             RocketsLeftText.text = $"Rockets Left: {_rocketsLeft}/{RocketLimit}";
         }
@@ -109,7 +109,7 @@ namespace Code
 
         private void ResetRocketInternal()
         {
-            _isRocketFired = false;
+            _isRocketLaunched = false;
             if (_rocketsLeft == 0)
             {
                 GameOver(false);
@@ -140,11 +140,11 @@ namespace Code
             _isGameOver = true;
             if (win)
             {
-                gameOverText.text = "Way to Go, Space Dandy!";
+                gameOverText.text = "Way to Go,\nSpace Dandy!";
             }
             else
             {
-                gameOverText.text = "See You Space Cowboy...";
+                gameOverText.text = "See You\nSpace Cowboy...";
             }
             gameOverText.text += "\nPress Esc to Restart";
         }

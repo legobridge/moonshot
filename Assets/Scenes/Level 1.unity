@@ -255,6 +255,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7438956531621738161, guid: 607da3c5c27f04a4c878c9ea6cd2c04b, type: 3}
+      propertyPath: LaunchVelocity
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8953931839034588569, guid: 607da3c5c27f04a4c878c9ea6cd2c04b, type: 3}
       propertyPath: m_Name
       value: Rocket

@@ -8,10 +8,9 @@ namespace Code
     {
         public static GameState Singleton;
 
-        public TextMeshProUGUI PetsReceivedText;
-        public TextMeshProUGUI TimeLeftText;
+        public TextMeshProUGUI RocketsLeftText;
         public TextMeshProUGUI gameOverText;
-        public static float GravitationalConstant = 6.6743e-6f;
+        public static float GravitationalConstant = 6.6743e-6f * 5;
         public int RocketLimit = 3;
 
         private int _rocketsLeft;
@@ -32,9 +31,8 @@ namespace Code
             _timeState = 0f;
             _isRocketFired = false;
             _isGameOver = false;
-            //PetsReceivedText.text = $"Pets Received: {_petsReceived}/{_numHumans}";
-            //TimeLeftText.text = $"Time Left: {_timeLeft}";
-            //gameOverText.text = "";
+            RocketsLeftText.text = $"Rockets Left: {_rocketsLeft}/{RocketLimit}";
+            gameOverText.text = "";
         }
 
         private void Update()
@@ -57,7 +55,16 @@ namespace Code
             }
             else
             {
-                float y = Input.GetAxis("Vertical");
+
+                float y = 0;
+                if (Input.GetButton("Forward"))
+                {
+                    y += 1;
+                }
+                if (Input.GetButton("Backward"))
+                {
+                    y -= 1;
+                }
                 _timeState += y;
             }
         }
@@ -92,7 +99,7 @@ namespace Code
             _rocketsLeft--;
             _isRocketFired = true;
 
-            //PetsReceivedText.text = $"Pets Received: {_petsReceived}/{_numHumans}";
+            RocketsLeftText.text = $"Rockets Left: {_rocketsLeft}/{RocketLimit}";
         }
 
         public static void ResetRocket()
@@ -103,7 +110,7 @@ namespace Code
         private void ResetRocketInternal()
         {
             _isRocketFired = false;
-            if (_rocketsLeft == 0) // Todo: do this only when final rocket crashes
+            if (_rocketsLeft == 0)
             {
                 GameOver(false);
             }

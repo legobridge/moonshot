@@ -51,7 +51,7 @@ namespace Code
         {
             if (_isRocketLaunched)
             {
-
+                _timeState += 0.1f;
             }
             else
             {

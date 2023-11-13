@@ -1,10 +1,10 @@
-# Catnap
-A simple Unity game about a sleepy cat.
+# Moonshot
+A simple Unity game about shooting for the moon(s).
 
 
 ## About the Game
 
-You're a very sleepy cat that wants to reach the cozy pillow and fall asleep. But you're also craving pets and belly rubs from all the humans around, and you can't fall asleep before you've had your fill of those. 
+
 
 ## Goal
 

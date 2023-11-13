@@ -27,9 +27,8 @@ Before launch:
 - Spacebar or Left Mouse Button to launch the rocket
 
 Post-Launch:
-- Arrow keys to use thrusters, to finely manoeuvre the rocket (motion is relative to rocket orientation)
-
-
+- Arrow keys or WSAD to use thrusters, to finely manoeuvre the rocket 
+(motion is relative to rocket orientation)
 - Escape to restart game after the Game Over Screen is shown
 
 ### Controller

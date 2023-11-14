@@ -37,5 +37,5 @@ Not Supported
 
 ### Other Notes
 
-Since the objects on the screen are small, please play on as big a screen as possible, and on the Game tab, change the Play Focused setting to Play Maximized.
+Since the objects on the screen are small, please play on as big a screen as possible, and if playing within the Unity Editor, change the Play Focused setting in the Game tab to Play Maximized.
 The orbits and sizes of the heavenly bodies are obviously not to scale, but the relative orbit periods are close approximations of real-life orbit periods.
